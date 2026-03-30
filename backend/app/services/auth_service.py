@@ -1,5 +1,6 @@
 from app.repositories.user_repository import UserRepository
 from app.core.security import hash_password, verify_password, create_access_token
+from fastapi import HTTPException
 
 class AuthService:
 
@@ -25,7 +26,7 @@ class AuthService:
         user = await UserRepository.get_by_email(data.email)
 
         if not user or not verify_password(data.password, user["password"]):
-            raise Exception("Invalid credentials")
+            raise HTTPException(status_code=401, detail="Invalid credentials")
 
         token = create_access_token({
             "user_id": str(user["_id"]),
