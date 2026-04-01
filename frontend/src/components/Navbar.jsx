@@ -4,33 +4,44 @@ import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const { user, logout } = useContext(AuthContext);
+  const initials = user?.name?.slice(0, 1)?.toUpperCase() || "G";
 
   return (
-    <nav style={{ display: "flex", gap: "10px", padding: "10px" }}>
-      
-      {/* <Link to="/">Home</Link> */}
+    <nav className="app-navbar">
+      <div className="app-navbar__inner">
+        <Link to={user ? "/" : "/login"} className="app-navbar__brand">
+          <span className="brand-mark">Mini Capstone</span>
+          <span className="brand-name">Telecom Portal</span>
+        </Link>
 
-      {!user ? (
-        <>
-          {/* Public links */}
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
-        </>
-      ) : (
-        <>
-          {/* Protected links */}
-          <Link to="/">Dashboard</Link>
-          <Link to="/plans">Plans</Link>
-          <Link to="/sims">My SIMs</Link>
-          <Link to="/recharge">Recharge</Link>
+        {!user ? (
+          <div className="app-navbar__links app-navbar__links--grow">
+            <Link to="/login" className="nav-link">Login</Link>
+            <Link to="/register" className="nav-link">Register</Link>
+          </div>
+        ) : (
+          <>
+            <div className="app-navbar__links app-navbar__links--grow">
+              <Link to="/" className="nav-link">Dashboard</Link>
+              <Link to="/plans" className="nav-link">Plans</Link>
+              <Link to="/sims" className="nav-link">My SIMs</Link>
+              <Link to="/recharge" className="nav-link">Recharge</Link>
+            </div>
 
-          <span style={{ marginLeft: "auto" }}>
-            {user.name} ({user.role})
-          </span>
+            <div className="user-chip">
+              <span className="user-chip__avatar">{initials}</span>
+              <span className="user-chip__meta">
+                <span className="user-chip__name">{user.name}</span>
+                <span className="user-chip__role">{user.role}</span>
+              </span>
+            </div>
 
-          <button onClick={logout}>Logout</button>
-        </>
-      )}
+            <button type="button" className="btn btn-secondary" onClick={logout}>
+              Logout
+            </button>
+          </>
+        )}
+      </div>
     </nav>
   );
 }

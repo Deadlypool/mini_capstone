@@ -15,52 +15,53 @@ import Recharge from "./pages/Recharge";
 function App() {
   return (
     <BrowserRouter>
+      <div className="app-shell">
 
-      {/* Navbar always visible */}
-      <Navbar />
+        {/* Navbar always visible */}
+        <Navbar />
 
-      <Routes>
-        {/* Public routes */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Routes>
+          {/* Public routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-        {/* Protected route */}
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
+          {/* Protected route */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/plans"
-          element={
-            <ProtectedRoute>
-              <Plans />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-  path="/sims"
-  element={
-    <ProtectedRoute>
-      <Sims />
-    </ProtectedRoute>
-  }
-/>
-        <Route
-  path="/recharge"
-  element={
-    <ProtectedRoute>
-      <Recharge />
-    </ProtectedRoute>
-  }
-/>
+          <Route
+            path="/plans"
+            element={
+              <ProtectedRoute>
+                <Plans />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/sims"
+            element={
+              <ProtectedRoute>
+                <Sims />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/recharge"
+            element={
+              <ProtectedRoute>
+                <Recharge />
+              </ProtectedRoute>
+            }
+          />
 
-      </Routes>
-
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }

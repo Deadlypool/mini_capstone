@@ -32,22 +32,47 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-    <form onSubmit={handleSubmit}>
-      <input
-        placeholder="Email"
-        onChange={(e) => setForm({ ...form, email: e.target.value })}
-      /> <br></br>
+    <main className="page-shell auth-layout">
+      <section className="card auth-card">
+        <div className="page-header page-header--auth">
+          <div>
+            <span className="hero-kicker">Welcome back</span>
+            <h1 className="page-title">Login</h1>
+            <p className="page-subtitle">
+              Sign in to manage plans, view SIM activity, and complete recharges.
+            </p>
+          </div>
+        </div>
 
-      <input
-        placeholder="Password"
-        type="password"
-        onChange={(e) => setForm({ ...form, password: e.target.value })}
-      /> <br></br>
+        <form onSubmit={handleSubmit} className="app-form mt-22">
+          <div className="field-group">
+            <label htmlFor="login-email">Email</label>
+            <input
+              id="login-email"
+              placeholder="Email"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+            />
+          </div>
 
-      <button type="submit">Login</button>
-    </form>
-    </div>
+          <div className="field-group">
+            <label htmlFor="login-password">Password</label>
+            <input
+              id="login-password"
+              placeholder="Password"
+              type="password"
+              value={form.password}
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
+            />
+          </div>
+
+          <div className="form-actions">
+            <button type="submit" className="btn btn-primary">Login</button>
+          </div>
+        </form>
+
+        <p className="auth-footer">Use your registered account to continue.</p>
+      </section>
+    </main>
   );
 }

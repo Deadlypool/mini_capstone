@@ -9,7 +9,6 @@ export default function Plans() {
   const [selectedPlan, setSelectedPlan] = useState(null);
 
   const { user } = useContext(AuthContext);
-
   const isAdmin = user?.role === "admin";
 
   useEffect(() => {
@@ -48,28 +47,70 @@ export default function Plans() {
   const clearEdit = () => setSelectedPlan(null);
 
   return (
-    <div>
-      <h1>Plans</h1>
+    <main className="page-shell page-stack">
+      <section className="page-header">
+        <div>
+          <span className="hero-kicker">Plan catalog</span>
+          <h1 className="page-title">Plans</h1>
+          <p className="page-subtitle">
+            Browse available offers and manage the plan catalog from one place.
+          </p>
+        </div>
+        <div className="hero-stat">
+          <strong>{plans.length}</strong>
+          <span>Plans available</span>
+        </div>
+      </section>
 
-      {/* 👑 Admin Form */}
       {isAdmin && (
-        <PlanForm
-          onSubmit={handleCreateOrUpdate}
-          selectedPlan={selectedPlan}
-          clearEdit={clearEdit}
-        />
+        <section className="card">
+          <div className="panel-header">
+            <div>
+              <h2 className="card-title">
+                {selectedPlan ? "Update plan" : "Create a new plan"}
+              </h2>
+              <p className="card-subtitle">
+                Add pricing, validity, and service details for customer-facing offers.
+              </p>
+            </div>
+            <span className="badge">{selectedPlan ? "Editing" : "Admin"}</span>
+          </div>
+
+          <PlanForm
+            onSubmit={handleCreateOrUpdate}
+            selectedPlan={selectedPlan}
+            clearEdit={clearEdit}
+          />
+        </section>
       )}
 
-      {/* Plans List */}
-      {plans.map((plan) => (
-        <PlanCard
-          key={plan.id}
-          plan={plan}
-          isAdmin={isAdmin}
-          onDelete={handleDelete}
-          onEdit={handleEdit}
-        />
-      ))}
-    </div>
+      <section className="card">
+        <div className="panel-header">
+          <div>
+            <h2 className="card-title">Available plans</h2>
+            <p className="card-subtitle">
+              A polished overview of current prices, validity, and benefits.
+            </p>
+          </div>
+          <span className="badge">{plans.length}</span>
+        </div>
+
+        {plans.length === 0 ? (
+          <div className="empty-state">No plans available yet.</div>
+        ) : (
+          <div className="app-card-list">
+            {plans.map((plan) => (
+              <PlanCard
+                key={plan.id}
+                plan={plan}
+                isAdmin={isAdmin}
+                onDelete={handleDelete}
+                onEdit={handleEdit}
+              />
+            ))}
+          </div>
+        )}
+      </section>
+    </main>
   );
 }

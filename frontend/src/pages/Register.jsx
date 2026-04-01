@@ -15,24 +15,54 @@ export default function Register() {
   };
 
   return (
-    <div>
-      <h1>Register</h1>
-    <form onSubmit={handleSubmit}>
-      <input
-        placeholder="Name"
-        onChange={(e) => setForm({ ...form, name: e.target.value })}
-      /> <br></br>
-      <input
-        placeholder="Email"
-        onChange={(e) => setForm({ ...form, email: e.target.value })}
-      /> <br></br>
-      <input
-        placeholder="Password"
-        type="password"
-        onChange={(e) => setForm({ ...form, password: e.target.value })}
-      /> <br></br>
-      <button type="submit">Register</button>
-    </form>
-    </div>
+    <main className="page-shell auth-layout">
+      <section className="card auth-card">
+        <div className="page-header page-header--auth">
+          <div>
+            <span className="hero-kicker">New account</span>
+            <h1 className="page-title">Register</h1>
+            <p className="page-subtitle">
+              Create an account to access the telecom dashboard and protected flows.
+            </p>
+          </div>
+        </div>
+
+        <form onSubmit={handleSubmit} className="app-form mt-22">
+          <div className="field-group">
+            <label htmlFor="register-name">Name</label>
+            <input
+              id="register-name"
+              placeholder="Name"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+            />
+          </div>
+          <div className="field-group">
+            <label htmlFor="register-email">Email</label>
+            <input
+              id="register-email"
+              placeholder="Email"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+            />
+          </div>
+          <div className="field-group">
+            <label htmlFor="register-password">Password</label>
+            <input
+              id="register-password"
+              placeholder="Password"
+              type="password"
+              value={form.password}
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
+            />
+          </div>
+          <div className="form-actions">
+            <button type="submit" className="btn btn-primary">Register</button>
+          </div>
+        </form>
+
+        <p className="auth-footer">A quick registration is all you need to get started.</p>
+      </section>
+    </main>
   );
 }
